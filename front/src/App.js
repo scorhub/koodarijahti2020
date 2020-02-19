@@ -5,7 +5,6 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import './App.css';
 import PageNotFound from './pages/PageNotFound';
 import Header from './pages/Header';
 import Navbar from './pages/Navbar';
