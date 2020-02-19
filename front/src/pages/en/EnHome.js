@@ -4,11 +4,12 @@ import Button from '../Button';
 const LoggedIn = () => {
     return (
         <>
-            <p>Jokainen painallus maksaa yhden pisteen.</p>
+            <p>Every press of the Button cost 1 point.</p>
             <Button />
-            <p>Joka 10. painallus tuottaa 5 pistettä</p>
-            <p>Joka 100. painallus tuottaa 40 pistettä</p>
-            <p>Joka 500. painallus tuottaa 250 pistettä</p>
+            <p>Prices:</p>
+            <p>Every 10th push: 5 points.</p>
+            <p>Every 100th push: 40 points.</p>
+            <p>Every 5000th push: 250 points.</p>
         </>
     )
 }
@@ -25,6 +26,7 @@ const NotLogged = () => {
 const EnHome = () => {
     return (
         <>
+        {window.localStorage.setItem('jahtilanguage', "eng")}
         {window.localStorage.getItem('koodarijahti') ? <LoggedIn /> : <NotLogged />}
         </>
     )

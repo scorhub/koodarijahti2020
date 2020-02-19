@@ -85,3 +85,34 @@
       text-align: left;
     }
   }
+
+.button {
+    width: 10em;
+    height: 10em;
+    background-color: red;
+    margin: auto;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 2px 4px #999;
+}
+
+.button:hover {
+    background-color: rgb(245, 0, 0);
+}
+
+.buttontext {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    pointer-events: none;
+}
+
+.button:active {
+    background-color: rgb(250, 0, 0);
+    box-shadow: 1px 2px #666;
+    transform: translateY(4px);
+  }

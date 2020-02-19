@@ -36,7 +36,7 @@ const EnLogin = () => {
           <br/>
           <input type="password" onChange={e => setUpdField(e.target.value, "psw")} value={login.psw} placeholder="Password" required />
           <br/>
-          <input className="button" type="submit" />
+            <button type="submit">Sign In</button>
         </form>
       </div>
     );
