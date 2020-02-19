@@ -1,11 +1,11 @@
 exports.seed = function(knex, Promise) {
-  return knex("points")
+  return knex("calculator")
     .del()
     .then(function() {
-      return knex("points").insert([
+      return knex("calculator").insert([
         {
           pid: 1,
-          points: 0
+          clicks: 0
         }
       ]);
     });

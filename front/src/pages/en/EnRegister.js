@@ -38,10 +38,10 @@ const EnRegister = () => {
       ) {
         regHandler(e, register);
       } else {
-        window.alert("Check username and password");
+        window.alert("Check username and password.");
       }
     } else {
-      window.alert("Passwords do not match");
+      window.alert("Passwords do not match.");
     }
   };
   return (

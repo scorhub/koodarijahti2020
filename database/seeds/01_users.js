@@ -6,7 +6,8 @@ exports.seed = function(knex, Promise) {
         {
           uid: 1,
           usern: "kimmo",
-          psw: "kimmo"
+          psw: "kimmo",
+          points: 0
         }
       ]);
     });
