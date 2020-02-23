@@ -13,9 +13,14 @@ const login = async credentials => {
 };
 
 const register = async credentials => {
-  console.log('register async')
   const response = await axios.post(`${baseURL}/register`, credentials);
   return response.data;
 };
 
-export default { setToken, login, register };
+const getUser = async () => {
+  const config = { headers: { Authorization: token } };
+  const response = await axios.get(`${baseURL}`, config);
+  return response.data;
+};
+
+export default { setToken, login, register, getUser };

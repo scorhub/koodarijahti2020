@@ -1,0 +1,4 @@
+POST http://localhost:3001/lost/thegame HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsInVzZXJuIjoidGVzdGkyIiwiaWF0IjoxNTgyNDc4ODk3fQ.ixm7W4vELHAaa075HU7A92ZzPXk1QksYSKHv2McSDZA
+content-type: application/json
+

@@ -9,7 +9,7 @@ const EnRegister = () => {
     jahtiserv
       .register(register)
       .then(res => {
-        window.confirm("Sign up successful");
+        window.alert("Sign up successful") ? window.location.href = "/en/login" : window.location.href = "/en/login";
       })
       .catch(err => {
         if(err.response.status === 409){

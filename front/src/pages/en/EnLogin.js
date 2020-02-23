@@ -10,7 +10,7 @@ const EnLogin = () => {
       jahtiserv.login(login)
         .then(res => {
           window.localStorage.setItem("koodarijahti", JSON.stringify(res));
-          window.confirm("Sign in successful") ? window.location.href = "/": window.location.href = "/";
+          window.alert("Sign in successful") ? window.location.href = "/": window.location.href = "/";
         })
         .catch(err => {
           if(err.response.status === 401){

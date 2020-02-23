@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,8 +18,30 @@ import FiAbout from "./pages/fi/FiAbout";
 import FiLogin from "./pages/fi/FiLogin";
 import FiRegister from "./pages/fi/FiRegister";
 import FiRules from "./pages/fi/FiRules";
+import jahtiserv from './serv/jahtiserv';
 
 function App() {
+  const [user, setUser] = useState({});
+const loginHook = () => {
+  const loggedUser = JSON.parse(window.localStorage.getItem("koodarijahti"));
+  if (loggedUser) {
+    jahtiserv.setToken(loggedUser.token);
+  }
+};
+useEffect(loginHook, []);
+
+const userHook = () => {
+  jahtiserv.getUser()
+    .then(res => {
+      setUser(res);
+    })
+    .catch(err => {
+      console.log("error: ", err);
+    });
+};
+useEffect(userHook, []);
+console.log('user ', user)
+
   return (
   <Router>
   <div className="App">
@@ -32,7 +54,7 @@ function App() {
             <Route exact path="/en/login" render={(props) => <EnLogin {...props} />} />
             <Route exact path="/en/register" render={(props) => <EnRegister {...props} />} />
             <Route exact path="/en/rules" render={(props) => <EnRules {...props} />} />
-            <Route exact path="/en" render={(props) => <EnHome {...props} />} />
+            <Route exact path="/en" render={(props) => <EnHome {...props} user={user} />} />
             {/* Finnish Routes */}
             <Route exact path="/fi/about" render={(props) => <FiAbout {...props} />} />
             <Route exact path="/fi/login" render={(props) => <FiLogin {...props} />} />
