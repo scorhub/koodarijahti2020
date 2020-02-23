@@ -11,7 +11,6 @@ router.get("/", function(req, res, next) {
 });
 
 router.post("/register", (req, res, next) => {
-
   bcrypt
     .hash(req.body.psw, 15)
     .then(passwordHash => {
@@ -25,11 +24,10 @@ router.post("/register", (req, res, next) => {
         .then(e => {
           res.status(204).end();
         })
-        .catch((err) => {
-            console.log(err);
-            res.status(409).json(
-                { error: 'Username already exists.' }
-        )})
+        .catch(err => {
+          console.log(err);
+          res.status(409).json({ error: "Username already exists." });
+        });
     })
     .catch(err => {
       console.log(err);
@@ -37,51 +35,43 @@ router.post("/register", (req, res, next) => {
     });
 });
 
-// router.post("/login", (req, res, next) => {
-//   const body = req.body;
+router.post("/login", (req, res, next) => {
+  const body = req.body;
 
-//   knex
-//     .from("users")
-//     .select("*")
-//     .where("usern", "=", body.usern)
-//     .then(user => {
-//       if (user.length === 0) {
-//         return res.status(401).json({ err: "Invalid username or password" });
-//       }
+  knex
+    .first("*")
+    .from("users")
+    .where("usern", "=", req.body.usern)
+    .then(user => {
+      if (user.length === 0) {
+        return res.status(401).json({ err: "Invalid username or password." });
+      }
 
-//       const tempUser = user[0];
-//       bcrypt.compare(body.psw, tempUser.psw).then(passwordCorrect => {
-//         if (!passwordCorrect) {
-//           console.log("salasana väärin");
-//           return res.status(401).json({ err: "Invalid username or password" });
-//         }
-//         console.log("salasana oikein");
-//         const userForToken = {
-//           usern: tempUser.usern,
-//           uid: tempUser.uid,
-//           name: tempUser.showname
-//         };
-//         const token = jwt.sign(userForToken, config.SECRET);
+      bcrypt.compare(req.body.psw, user.psw).then(passwordCorrect => {
+        if (!passwordCorrect) {
+          return res.status(401).json({ err: "Invalid username or password." });
+        }
+        const userForToken = {
+          uid: user.uid,
+          usern: user.usern
+        };
+        const token = jwt.sign(userForToken, config.SECRET);
 
-//         console.log("token", token);
-
-//         res
-//           .status(200)
-//           .send({
-//             username: tempUser.usern,
-//             name: tempUser.showname,
-//             accesslevel: "pogo",
-//             token
-//           });
-
-//         next();
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err);
-
-//       res.status(500).json({ err: "database error in login" });
-//     });
-// });
+        res.status(200).send({
+          username: user.usern,
+          points: user.points,
+          token
+        });
+        next();
+      }).catch(err => {
+        console.log(err);
+        res.status(500).json({ err: "Server error in login." });
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ err: "Database error in login." });
+    });
+});
 
 module.exports = router;

@@ -30,8 +30,9 @@ const Navbar = () => {
       <NavLink activeClassName="active" exact to="/en/about">About</NavLink>
       <NavLink activeClassName="active" exact to="/en/rules">Rules</NavLink>
       <NavLink exact to="/fi" onClick={e => window.location.replace("/fi")}>Suomeksi</NavLink>
-      <NavLink activeClassName="active" exact to="/en/login">Sign In</NavLink>
-      <NavLink activeClassName="active" exact to="/en/register">Sign up</NavLink>
+      {!window.localStorage.getItem("koodarijahti") ? <NavLink activeClassName="active" className="rightside" exact to="/en/register">Sign up</NavLink> : ""}
+      {!window.localStorage.getItem("koodarijahti") ? <NavLink activeClassName="active" className="rightside" exact to="/en/login">Sign In</NavLink> : ""}
+      {window.localStorage.getItem("koodarijahti") ? <NavLink to="#" className="rightside hotlink" onClick={e => {localStorage.clear(); window.location.href = "/";}}>Sign Out</NavLink> : ""}
       <NavLink to="#" className="icon" onClick={e => showMore()}><i className="fa fa-bars" id="icon"></i></NavLink>
     </nav>
   );

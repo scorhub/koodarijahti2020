@@ -10,11 +10,17 @@ const EnLogin = () => {
       jahtiserv.login(login)
         .then(res => {
           window.localStorage.setItem("koodarijahti", JSON.stringify(res));
-          window.location.reload();
+          window.confirm("Sign in successful") ? window.location.href = "/": window.location.href = "/";
         })
         .catch(err => {
-          window.alert("Wrong username or password.");
-        });
+          if(err.response.status === 401){
+          window.alert('Invalid username or password.');
+        } else if (err.response.status === 500){
+          window.alert('Server error, please try again.');
+        } else {
+          window.alert('Unknown error, please try again.');
+        }
+      });
     };
   
     const logMeIn = e => {
