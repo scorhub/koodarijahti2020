@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken");
 const isAuthenticated = require('../mw/auth');
 
 router.get("/", isAuthenticated, function(req, res, next) {
-  console.log(res.locals)
   knex.first("*").from('users')
   .where('uid', '=', res.locals.auth.uid)
   .then((user) => {
@@ -29,12 +28,14 @@ router.get("/", isAuthenticated, function(req, res, next) {
 });
 
 router.post("/", isAuthenticated, function(req, res, next) {
-  console.log('reslocalsuathuid post / ', res.locals.auth.uid)
+  if(req.body.points <= 0){
+    const zeroPoints = { points: 0}
+    res.status(200).json(zeroPoints);
+  } else {
   knex.first("*").from('users')
   .where('uid', '=', res.locals.auth.uid)
   .then(user => {
     if(user.points > 0) {
-      console.log('morepoints than 0')
       knex('users')
       .where('uid', '=', user.uid)
       .decrement('points')
@@ -46,48 +47,70 @@ router.post("/", isAuthenticated, function(req, res, next) {
           knex.first('*').from('calculator')
           .where('pid', '=', 1)
           .then(number => {
-            console.log('number.clicks: ', number.clicks)
-            // const jaa5lla = number.clicks / 5;
-            // console.log('jaaviidella ', Number.isInteger(jaa5lla));
-            // console.log('jaaviidella');
-            // console.log('jaaviidella ', (number.clicks / 5));
             if(Number.isInteger(number.clicks / 500)){
               let win500 = user.points +249;
               let won250 = { points: win500 }
               knex('users')
               .where('uid', '=', user.uid)
               .update(won250)
-              console.log('won 250 points')
+              .then(result => {
+                const wonMsg250 = { ...won250, won: 250}
+                res.status(200).json(wonMsg250)
+              })
             } else if (Number.isInteger(number.clicks / 100)){
               let win100 = user.points +39;
               let won40 = { points: win100 }
               knex('users')
               .where('uid', '=', user.uid)
               .update(won40)
-              console.log('won 40 points')
+              .then(result => {
+                const wonMsg40 = { ...won40, won: 40}
+                res.status(200).json(wonMsg40)
+              })
             } else if (Number.isInteger(number.clicks / 10)){
               let win10 = user.points +4;
               let won5 = { points: win10 }
-              console.log('won 5 points')
               knex('users')
               .where('uid', '=', user.uid)
               .update(won5)
+              .then(result => {
+                const wonMsg5 = { ...won5, won: 5}
+                res.status(200).json(wonMsg5)
+              })
+            } else {
+              const tempPoints = user.points -1;
+              const pointsNow = { points: tempPoints, won: 0 }
+              res.status(200).json(pointsNow);
             }
           })
-
-          // const pointsNow = user.points -1;
-          // console.log('pojotnyt ', pointsNow)
-          // res.status(200).json(pointsNow);
         })
       })
     } else {
-    console.log('nopoints')
+      const zeroPoints = { points: 0}
+      res.status(200).json(zeroPoints);
     }
   })
   .catch((err) => {
       console.log(err);
       res.status(400).json({ error: 'User not found.' })
   })
+}});
+
+router.patch("/reset", isAuthenticated, (req, res, next) => {
+  if(req.body.points <= 0){
+  knex('users')
+  .where('uid', '=', res.locals.auth.uid)
+  .update({ points: 20 })
+    .then(e => {
+      res.status(204).end();
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(403).json({ error: "Forbidden." });
+    });
+  } else {
+    res.status(403).json({ error: "Forbidden." });
+  }
 });
 
 router.post("/register", (req, res, next) => {

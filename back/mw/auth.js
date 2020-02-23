@@ -35,7 +35,7 @@ const isAuthenticated = (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).json({ error: 'database error' })
+            res.status(401).json({ error: 'Unauthorized' })
         })
 }
 

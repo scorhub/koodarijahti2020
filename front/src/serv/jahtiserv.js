@@ -23,4 +23,16 @@ const getUser = async () => {
   return response.data;
 };
 
-export default { setToken, login, register, getUser };
+const button = async myPoints => {
+  const config = { headers: { Authorization: token } };
+  const response = await axios.post(`${baseURL}`, myPoints, config);
+  return response.data;
+};
+
+const resetUser = async points => {
+  const config = { headers: { Authorization: token } };
+  const response = await axios.patch(`${baseURL}/reset`, points, config);
+  return response.data;
+};
+
+export default { setToken, login, register, getUser, button, resetUser };

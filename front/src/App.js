@@ -40,8 +40,6 @@ const userHook = () => {
     });
 };
 useEffect(userHook, []);
-console.log('user ', user)
-
   return (
   <Router>
   <div className="App">
@@ -54,7 +52,7 @@ console.log('user ', user)
             <Route exact path="/en/login" render={(props) => <EnLogin {...props} />} />
             <Route exact path="/en/register" render={(props) => <EnRegister {...props} />} />
             <Route exact path="/en/rules" render={(props) => <EnRules {...props} />} />
-            <Route exact path="/en" render={(props) => <EnHome {...props} user={user} />} />
+            <Route exact path="/en" render={(props) => <EnHome {...props} user={user} setUser={setUser} />} />
             {/* Finnish Routes */}
             <Route exact path="/fi/about" render={(props) => <FiAbout {...props} />} />
             <Route exact path="/fi/login" render={(props) => <FiLogin {...props} />} />

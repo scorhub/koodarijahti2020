@@ -22,7 +22,6 @@ const Navbar = () => {
   }
   
   let language = window.localStorage.getItem("jahtilanguage");
-  console.log(language)
   if(language === "eng"){
   return (
     <nav id="navbar">
