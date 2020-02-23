@@ -5,6 +5,7 @@ const LoggedIn = () => {
     return (
         <>
             <p>Every press of the Button cost 1 point.</p>
+            <p>You have ?points?</p>
             <Button />
             <p><b>Prices:</b><br />
             Every 10th push: 5 points.<br />

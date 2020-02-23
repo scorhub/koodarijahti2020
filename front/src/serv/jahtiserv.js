@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "/thegame";
+const baseURL = "/lost/thegame";
 
 let token = null;
 
