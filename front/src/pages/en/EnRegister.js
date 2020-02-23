@@ -11,9 +11,15 @@ const EnRegister = () => {
       .then(res => {
         window.confirm("Sign up successful");
       })
-      .catch(e => {
-        window.alert("Database error, WHAT NUMBER?", e);
-      });
+      .catch(err => {
+        if(err.response.status === 409){
+        window.alert('Username already exists, please choose a different one.');
+      } else if (err.response.status === 500){
+        window.alert('Server error, please try again.');
+      } else {
+        window.alert('Unknown error, please try again.');
+      }
+    });
   };
 
   const setRegField = (value, fieldname) => {

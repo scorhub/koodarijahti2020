@@ -25,14 +25,15 @@ router.post("/register", (req, res, next) => {
         .then(e => {
           res.status(204).end();
         })
-        .catch(err => {
-          console.log(err);
-          res.status(500).json({ error: "Database error in register." });
-        });
+        .catch((err) => {
+            console.log(err);
+            res.status(409).json(
+                { error: 'Username already exists.' }
+        )})
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ error: "Database error in hashing password." });
+      res.status(500).json({ error: "Server error in hashing password." });
     });
 });
 
