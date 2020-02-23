@@ -13,6 +13,7 @@ const login = async credentials => {
 };
 
 const register = async credentials => {
+  console.log('register async')
   const response = await axios.post(`${baseURL}/register`, credentials);
   return response.data;
 };
