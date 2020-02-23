@@ -7,7 +7,6 @@ const ClickButton = ({ user, setUser }) => {
         let tempUser = { ...user}
         tempUser.points = res.points
         setUser(tempUser);
-        console.log(res.won)
         if(res.won > 0){
             window.alert('Congratulations, you have won ' + res.won + ' points!\nNext win in 10 more clicks!')
         }

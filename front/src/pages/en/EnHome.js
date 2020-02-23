@@ -1,7 +1,21 @@
 import React from 'react';
 import Button from '../Button';
+import { NavLink } from 'react-router-dom';
+import jahtiserv from '../../serv/jahtiserv';
 
 const LoggedIn = ({user, setUser}) => {
+
+    const resetPoints = () => {
+        jahtiserv.resetUser(user)
+                .then(e => {
+                    window.alert('Your points have been reseted, happy playing!')
+                    let tempResetUser = { ...user}
+                    tempResetUser.points = 20
+                    setUser(tempResetUser);
+                })
+    }
+
+    if(user.points > 0){
     return (
         <>
             <p>Every press of the Button cost 1 point.</p>
@@ -13,6 +27,15 @@ const LoggedIn = ({user, setUser}) => {
             Every 500th push: 250 points.</p>
         </>
     )
+    } else {
+        return (
+            <>
+            <p>You are out of points :(</p>
+            <br/>
+            <p>Reset your points by pressing <NavLink to="#" onClick={e => resetPoints()} >here.</NavLink></p> 
+            </>
+        )
+    }
 }
 
 const NotLogged = () => {
