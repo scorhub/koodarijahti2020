@@ -52,6 +52,8 @@ const EnHome = ({user, setUser}) => {
         <>
         {window.localStorage.setItem('jahtilanguage', "eng")}
         {window.localStorage.getItem('koodarijahti') ? <LoggedIn user={user} setUser={setUser} /> : <NotLogged />}
+        
+        <p>debuggaukset (esim register pätkäsee nimen pituuden), joi schemat, testit, koodin kommentoinnit, css</p>
         </>
     )
 }
