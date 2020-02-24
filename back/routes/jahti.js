@@ -132,8 +132,6 @@ router.post("/register", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-  const body = req.body;
-
   knex
     .first("*")
     .from("users")

@@ -23,14 +23,16 @@ import jahtiserv from './serv/jahtiserv';
 function App() {
   const [user, setUser] = useState({});
 const loginHook = () => {
+  if(window.localStorage.getItem("koodarijahti")){
   const loggedUser = JSON.parse(window.localStorage.getItem("koodarijahti"));
   if (loggedUser) {
     jahtiserv.setToken(loggedUser.token);
-  }
+  }};
 };
 useEffect(loginHook, []);
 
 const userHook = () => {
+  if(window.localStorage.getItem("koodarijahti")){
   jahtiserv.getUser()
     .then(res => {
       setUser(res);
@@ -38,6 +40,7 @@ const userHook = () => {
     .catch(err => {
       console.log("error: ", err);
     });
+  };
 };
 useEffect(userHook, []);
   return (
