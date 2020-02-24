@@ -12,7 +12,7 @@ const ClickButton = ({ user, setUser }) => {
         }
         if(res.points === 0){
             if(window.confirm('You are out of points. Would you like to reset back to 20?')){
-                jahtiserv.resetUser(user)
+                jahtiserv.resetUser(res)
                 .then(e => {
                     window.alert('Your points have been reseted, happy playing!')
                     let tempResetUser = { ...user}

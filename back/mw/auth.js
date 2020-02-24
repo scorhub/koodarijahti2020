@@ -30,7 +30,7 @@ const isAuthenticated = (req, res, next) => {
             if (user.lenght === 0) {
                 return res.status(401).json({ error: "Token invalid" })
             }
-            res.locals.auth = { uid: decodedToken.uid, usern: decodedToken.usern };
+            res.locals.auth = { uid: decodedToken.uid, usern: decodedToken.usern, points: user.points };
             next();
         })
         .catch((err) => {

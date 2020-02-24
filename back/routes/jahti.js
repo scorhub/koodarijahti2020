@@ -32,12 +32,9 @@ router.post("/", isAuthenticated, function(req, res, next) {
     const zeroPoints = { points: 0}
     res.status(200).json(zeroPoints);
   } else {
-  knex.first("*").from('users')
-  .where('uid', '=', res.locals.auth.uid)
-  .then(user => {
-    if(user.points > 0) {
+    if(res.locals.auth.points > 0) {
       knex('users')
-      .where('uid', '=', user.uid)
+      .where('uid', '=', res.locals.auth.uid)
       .decrement('points')
       .then(abc => {
         knex('calculator')
@@ -48,37 +45,37 @@ router.post("/", isAuthenticated, function(req, res, next) {
           .where('pid', '=', 1)
           .then(number => {
             if(Number.isInteger(number.clicks / 500)){
-              let win500 = user.points +249;
+              let win500 = res.locals.auth.points +249;
               let won250 = { points: win500 }
               knex('users')
-              .where('uid', '=', user.uid)
+              .where('uid', '=', res.locals.auth.uid)
               .update(won250)
               .then(result => {
                 const wonMsg250 = { ...won250, won: 250}
                 res.status(200).json(wonMsg250)
               })
             } else if (Number.isInteger(number.clicks / 100)){
-              let win100 = user.points +39;
+              let win100 = res.locals.auth.points +39;
               let won40 = { points: win100 }
               knex('users')
-              .where('uid', '=', user.uid)
+              .where('uid', '=', res.locals.auth.uid)
               .update(won40)
               .then(result => {
                 const wonMsg40 = { ...won40, won: 40}
                 res.status(200).json(wonMsg40)
               })
             } else if (Number.isInteger(number.clicks / 10)){
-              let win10 = user.points +4;
+              let win10 = res.locals.auth.points +4;
               let won5 = { points: win10 }
               knex('users')
-              .where('uid', '=', user.uid)
+              .where('uid', '=', res.locals.auth.uid)
               .update(won5)
               .then(result => {
                 const wonMsg5 = { ...won5, won: 5}
                 res.status(200).json(wonMsg5)
               })
             } else {
-              const tempPoints = user.points -1;
+              const tempPoints = res.locals.auth.points -1;
               const pointsNow = { points: tempPoints, won: 0 }
               res.status(200).json(pointsNow);
             }
@@ -89,11 +86,6 @@ router.post("/", isAuthenticated, function(req, res, next) {
       const zeroPoints = { points: 0}
       res.status(200).json(zeroPoints);
     }
-  })
-  .catch((err) => {
-      console.log(err);
-      res.status(400).json({ error: 'User not found.' })
-  })
 }});
 
 router.patch("/reset", isAuthenticated, (req, res, next) => {
@@ -109,13 +101,13 @@ router.patch("/reset", isAuthenticated, (req, res, next) => {
       res.status(403).json({ error: "Forbidden." });
     });
   } else {
-    res.status(403).json({ error: "Forbidden." });
+    res.status(400).json({ error: "Bad Request." });
   }
 });
 
 router.post("/register", (req, res, next) => {
   bcrypt
-    .hash(req.body.psw, 15)
+    .hash(req.body.psw, 10)
     .then(passwordHash => {
       const userReg = {
         usern: req.body.usern,
@@ -126,7 +118,7 @@ router.post("/register", (req, res, next) => {
       knex("users")
         .insert(userReg)
         .then(e => {
-          res.status(204).end();
+          res.status(201).end();
         })
         .catch(err => {
           console.log(err);

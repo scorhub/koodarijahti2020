@@ -1,12 +1,10 @@
-// Update with your config settings.
-
 module.exports = {
 
   development: {
     client: 'mysql',
     connection: {
       user: 'root',
-      password: '',
+      password: 'mypass123',
       database: 'koodarijahti2020'
     }
   },
