@@ -6,7 +6,6 @@ const FiLogin = () => {
   
     const loginForm = (e, login) => {
       e.preventDefault();
-      console.log(login)
       jahtiserv.login(login)
         .then(res => {
           window.localStorage.setItem("koodarijahti", JSON.stringify(res));
