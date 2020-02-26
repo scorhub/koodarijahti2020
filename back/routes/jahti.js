@@ -5,8 +5,10 @@ const options = config.DB_OPTIONS;
 const knex = require("knex")(options);
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const validator = require('express-joi-validation').createValidator({})
 
 const isAuthenticated = require('../mw/auth');
+const userSchema = require('../models/userSchema');
 
 router.get("/", isAuthenticated, function(req, res, next) {
   knex.first("*").from('users')
@@ -105,7 +107,7 @@ router.patch("/reset", isAuthenticated, (req, res, next) => {
   }
 });
 
-router.post("/register", (req, res, next) => {
+router.post("/register", validator.body(userSchema), (req, res, next) => {
   bcrypt
     .hash(req.body.psw, 10)
     .then(passwordHash => {
@@ -131,7 +133,7 @@ router.post("/register", (req, res, next) => {
     });
 });
 
-router.post("/login", (req, res, next) => {
+router.post("/login", validator.body(userSchema), (req, res, next) => {
   knex
     .first("*")
     .from("users")

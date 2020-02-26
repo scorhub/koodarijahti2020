@@ -1,0 +1,4 @@
+PATCH  http://localhost:3001/lost/thegame/reset HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsInVzZXJuIjoidGVzdGkyIiwiaWF0IjoxNTgyNzEyMjg2fQ.cGDMJcnYXikmc0DlehfEIXud6MHb0LvujFtShSXOUl8
+content-type: application/json
+

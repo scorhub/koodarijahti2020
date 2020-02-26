@@ -62,11 +62,11 @@ const EnRegister = () => {
           <div className="regform">
             <div className="clientreg">
               <b>Username * </b><br/>
-              <input type="text" onChange={e => setRegField(e.target.value, "usern")} required value={register.usern} /><br/>
+              <input type="text" onChange={e => setRegField(e.target.value, "usern")} required value={register.usern} minLength="5" maxLength="10"/><br/>
               <b>Password * </b><br/>
-              <input type="password" onChange={e => setRegField(e.target.value, "psw")} required value={register.psw} /><br/>
+              <input type="password" onChange={e => setRegField(e.target.value, "psw")} required value={register.psw} minLength="5" maxLength="16" /><br/>
               <b>Password again * </b><br/>
-              <input type="password" onChange={e => setRegField(e.target.value, "psw2")} required value={register.psw2} />
+              <input type="password" onChange={e => setRegField(e.target.value, "psw2")} required value={register.psw2} minLength="5" maxLength="16" />
             </div>
             <p>* Required Information.</p>
           </div>

@@ -38,9 +38,9 @@ const EnLogin = () => {
       <div className="item">
         <h4>Sign In</h4>
         <form onSubmit={e => logMeIn(e)}>
-          <input type="text" onChange={e => setUpdField(e.target.value, "usern")} value={login.usern} autoFocus="autofocus" placeholder="Username" required />
+          <input type="text" onChange={e => setUpdField(e.target.value, "usern")} value={login.usern} autoFocus="autofocus" placeholder="Username" required minLength="5" maxLength="10" />
           <br/>
-          <input type="password" onChange={e => setUpdField(e.target.value, "psw")} value={login.psw} placeholder="Password" required />
+          <input type="password" onChange={e => setUpdField(e.target.value, "psw")} value={login.psw} placeholder="Password" required minLength="5" maxLength="16" />
           <br/>
             <button type="submit">Sign In</button>
         </form>
