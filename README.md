@@ -1,4 +1,4 @@
--------------------------------------------------------
+---------------------------
 About Project
 
 This is project for Vincit summer recruiment <i>Koodarijahti 2020</i>. Assigment in finnish can be found here: https://koodarijahti.fi/Ennakkotehtava_2020_Painikepeli.pdf
@@ -8,15 +8,15 @@ Frontend: React with <i>React Router Dom</i> and <i>axios</i>. In basic structur
 Backend: Node.js with following packages; <i>bcryptjs</i>, <i>dotenv</i>, <i>express</i>, <i>jest</i>, <i>@hapi/joi</i>, <i>express-joi-validation</i>, <i>jsonwebtoken</i>, <i>knex</i> and <i>nodemon</i>.<br>
 Database runs on MySQL server, migrations run with <i>knex</i>.
 
--------------------------------------------------------
+---------------------------
 Live version
 
 Live version of the project can be played at https://buttongame.nodeeli3.net/
 
--------------------------------------------------------
+---------------------------
 Folder structure of the project
 
-├─ back<br>
+<p>├─ back<br>
 │  ├─ bin<br>
 │  ├─ <i>build</i>      # Compiled files (not uploaded to GitHub, you can clone project and make your own build)<br>
 │  ├─ models<br>
@@ -37,8 +37,8 @@ Folder structure of the project
 │      │  ├─ en          # English pages<br>
 │      │  └─ fi          # Finnish pages<br>
 │      └─ serv<br>
-└─ README.md
--------------------------------------------------------
+└─ README.md</p>
+---------------------------
 Installation guide for Windows
 
 Clone this repositary to your local device with git-client or download the zip-package and uzip it. Run command <b>npm install</b> in <i>front</i>, <i>back</i> and <i>database</i> folders with Command Prompt to install depencies. After that run <b>npm run build</b> in <i>front</i> and move the created <i>build</i> folder into the root of the <i>back</i>.
@@ -56,7 +56,8 @@ PORT = 3001<br>
 SECRET = supersecret<br>
 <br>
 You can now start the application by running the command <b>npm run watch</B> in <i>back</i>.
--------------------------------------------------------
+
+---------------------------
 Knexfile.js Configuration (for local mysql database)
 
 Here are <i>knexfile.js</i> configuration for using it with XAMPP:<br>
