@@ -16,7 +16,7 @@ Live version of the project can be played at https://buttongame.nodeeli3.net/
 ---------------------------
 Folder structure of the project
 
-<p>├─ back<br>
+├─ back<br>
 │  ├─ bin<br>
 │  ├─ <i>build</i>      # Compiled files (not uploaded to GitHub, you can clone project and make your own build)<br>
 │  ├─ models<br>
@@ -37,7 +37,8 @@ Folder structure of the project
 │      │  ├─ en          # English pages<br>
 │      │  └─ fi          # Finnish pages<br>
 │      └─ serv<br>
-└─ README.md</p>
+└─ README.md
+
 ---------------------------
 Installation guide for Windows
 
