@@ -7,7 +7,7 @@ const FiRegister = () => {
   const regHandler = e => {
     e.preventDefault();
     jahtiserv
-      .register(register)
+      .register({usern: register.usern, psw: register.psw})
       .then(res => {
         window.alert("Rekisteröinti onnistui") ? window.location.href = "/fi/login" : window.location.href = "/fi/login";
       })

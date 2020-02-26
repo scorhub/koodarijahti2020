@@ -7,7 +7,7 @@ const EnRegister = () => {
   const regHandler = e => {
     e.preventDefault();
     jahtiserv
-      .register(register)
+      .register({usern: register.usern, psw: register.psw})
       .then(res => {
         window.alert("Sign up successful") ? window.location.href = "/en/login" : window.location.href = "/en/login";
       })
@@ -30,8 +30,8 @@ const EnRegister = () => {
 
   const checkFields = (fieldName, fieldValue) => {
     const rules = {
-      usern: /^[a-zA-Z0-9_]{3,20}$/,
-      psw: /^[a-zA-Z0-9_]{3,20}$/
+      usern: /^[a-zA-Z0-9_]{5,12}$/,
+      psw: /^[a-zA-Z0-9_]{5,12}$/
     };
     return fieldValue.match(rules[fieldName]);
   };
@@ -62,11 +62,11 @@ const EnRegister = () => {
           <div className="regform">
             <div className="clientreg">
               <b>Username * </b><br/>
-              <input type="text" onChange={e => setRegField(e.target.value, "usern")} required value={register.usern} minLength="5" maxLength="10"/><br/>
+              <input type="text" onChange={e => setRegField(e.target.value, "usern")} autoFocus="autofocus" required value={register.usern} minLength="5" maxLength="10" /><br/>
               <b>Password * </b><br/>
-              <input type="password" onChange={e => setRegField(e.target.value, "psw")} required value={register.psw} minLength="5" maxLength="16" /><br/>
+              <input type="password" onChange={e => setRegField(e.target.value, "psw")} required value={register.psw} minLength="5" maxLength="10" /><br/>
               <b>Password again * </b><br/>
-              <input type="password" onChange={e => setRegField(e.target.value, "psw2")} required value={register.psw2} minLength="5" maxLength="16" />
+              <input type="password" onChange={e => setRegField(e.target.value, "psw2")} required value={register.psw2} minLength="5" maxLength="10" />
             </div>
             <p>* Required Information.</p>
           </div>
