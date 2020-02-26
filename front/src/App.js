@@ -62,7 +62,7 @@ useEffect(userHook, []);
             <Route exact path="/fi/register" render={(props) => <FiRegister {...props} />} />
             <Route exact path="/fi/rules" render={(props) => <FiRules {...props} />} />
             <Route exact path="/fi" render={(props) => <FiHome {...props} user={user} setUser={setUser} />} />
-            <Route exact path="/" render={() => <Redirect to="/en" />} />
+            {window.localStorage.getItem('jahtilanguage') === "fi" ? <Route exact path="/" render={() => <Redirect to="/fi" />} /> : <Route exact path="/" render={() => <Redirect to="/en" />} /> }
             {/* Invalid Address */}
             <Route component={PageNotFound} />
           </Switch>
