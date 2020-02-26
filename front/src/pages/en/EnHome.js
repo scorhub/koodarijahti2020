@@ -40,8 +40,8 @@ const LoggedIn = ({user, setUser}) => {
 
 const NotLogged = () => {
     return (
-        <div>
-            <p>Hello World</p>
+        <div className="textbox">
+            <p>Welcome to the Button Game.<br/><br/>Sign In to play, or read rules to <NavLink to="/en/rules">here</NavLink>.</p>
         </div>
     )
 
@@ -52,8 +52,6 @@ const EnHome = ({user, setUser}) => {
         <>
         {window.localStorage.setItem('jahtilanguage', "eng")}
         {window.localStorage.getItem('koodarijahti') ? <LoggedIn user={user} setUser={setUser} /> : <NotLogged />}
-        
-        <p>koodin kommentoinnit, css</p>
         </>
     )
 }

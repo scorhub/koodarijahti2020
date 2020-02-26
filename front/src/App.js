@@ -61,7 +61,7 @@ useEffect(userHook, []);
             <Route exact path="/fi/login" render={(props) => <FiLogin {...props} />} />
             <Route exact path="/fi/register" render={(props) => <FiRegister {...props} />} />
             <Route exact path="/fi/rules" render={(props) => <FiRules {...props} />} />
-            <Route exact path="/fi" render={(props) => <FiHome {...props} />} />
+            <Route exact path="/fi" render={(props) => <FiHome {...props} user={user} setUser={setUser} />} />
             <Route exact path="/" render={() => <Redirect to="/en" />} />
             {/* Invalid Address */}
             <Route component={PageNotFound} />

@@ -25,7 +25,7 @@ const Navbar = () => {
   if(language === "eng"){
   return (
     <nav id="navbar">
-      <NavLink activeClassName="active" exact to="/en">Home</NavLink>
+      <NavLink activeClassName="active" exact to="/en">{!window.localStorage.getItem("koodarijahti") ? "Home" : "Play the Game"}</NavLink>
       <NavLink activeClassName="active" exact to="/en/about">About</NavLink>
       <NavLink activeClassName="active" exact to="/en/rules">Rules</NavLink>
       <NavLink exact to="/fi" onClick={e => window.location.replace("/fi")}>Suomeksi</NavLink>
@@ -38,13 +38,14 @@ const Navbar = () => {
   } else {
     return (
       <nav id="navbar">
-        <NavLink activeClassName="active" exact to="/fi">Etusivu</NavLink>
+        <NavLink activeClassName="active" exact to="/fi">{!window.localStorage.getItem("koodarijahti") ? "Etusivu" : "Pelaa"}</NavLink>
         <NavLink activeClassName="active" exact to="/fi/about">Tietoa</NavLink>
         <NavLink activeClassName="active" exact to="/fi/rules">Säännöt</NavLink>
         <NavLink exact to="/en" onClick={e => window.location.replace("/en")}>In English</NavLink>
-        <NavLink activeClassName="active" exact to="/fi/login">Kirjaudu</NavLink>
-        <NavLink activeClassName="active" exact to="/fi/register">Rekisteröidy</NavLink>
-        <NavLink to="#" className="icon" onClick={e => showMore()}><i className="fa fa-bars" id="icon"></i></NavLink>
+      {!window.localStorage.getItem("koodarijahti") ? <NavLink activeClassName="active" className="rightside" exact to="/fi/register">Rekisteröidy</NavLink> : ""}
+      {!window.localStorage.getItem("koodarijahti") ? <NavLink activeClassName="active" className="rightside" exact to="/fi/login">Kirjaudu</NavLink> : ""}
+      {window.localStorage.getItem("koodarijahti") ? <NavLink to="#" className="rightside hotlink" onClick={e => {localStorage.clear(); window.location.href = "/";}}>Kirjaudu ulos</NavLink> : ""}
+      <NavLink to="#" className="icon" onClick={e => showMore()}><i className="fa fa-bars" id="icon"></i></NavLink>
       </nav>
     );
   }
